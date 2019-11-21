@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText etAdults, etChildren, etRoom;
     private Button btnCalculate;
     TextView datepickerCheckInDate,  datepickerCheckOutDate;
+    ProgressBar progressBarCircle;
 
     TextView tvDays, tvError, tvLocation, tvRoomType, tvInDate, tvOutDate, tvAdults, tvChildren, tvRoom, tvSErvice, tvTax, tvTotal;
     int Year2, Year3;
@@ -37,7 +38,40 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        datepickerCheckInDate = findViewById(R.id.datepickerCheckInDate);
+        View handler;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (progressStatus < 100) {
+                    progressStatus += 1;
+
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            pbCircle.setProgress(progressStatus);
+                        }
+                    });
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+
+        handler.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                pbCircle.setVisibility(View.GONE);
+            }
+
+        }, 5000);
+    }
+
+
+    datepickerCheckInDate = findViewById(R.id.datepickerCheckInDate);
         datepickerCheckOutDate = findViewById(R.id.datepickerCheckOutDate);
         etAdults = findViewById(R.id.etAdults);
         etChildren = findViewById(R.id.etChildren);
@@ -57,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
         tvSErvice = findViewById(R.id.tvService);
         tvTax = findViewById(R.id.tvTax);
         tvTotal = findViewById(R.id.tvTotal);
+
+
 
         final SimpleDateFormat formatdate = new SimpleDateFormat("yyyy/MM/dd", Locale.US);
 
