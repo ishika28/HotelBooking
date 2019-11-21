@@ -62,7 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:text="Check In Date"
+        android:text="Check Out Date"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="15dp"
         />
@@ -109,6 +109,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="1"
+            android:inputType="number"
             android:id="@+id/etAdults"
             android:textAlignment="center"
 
@@ -117,6 +118,7 @@
         <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:layout_weight="1"
             android:textAlignment="center"
             android:id="@+id/etChildren"
@@ -128,6 +130,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="1"
+            android:inputType="number"
             android:id="@+id/etRoom"
             android:textAlignment="center"
             />
@@ -166,65 +169,76 @@
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
+                android:textSize="18dp"
                 android:id="@+id/tvLocation"
                 />
 
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
+                android:textSize="18dp"
                 android:id="@+id/tvRoomType"
                 />
 
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
+                android:textSize="18dp"
                 android:id="@+id/tvInDate"
                 />
 
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
+                android:textSize="18dp"
                 android:id="@+id/tvOutDate"
                 />
 
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
+                android:textSize="18dp"
                 android:id="@+id/tvAdults"
                 />
 
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
+                android:textSize="18dp"
                 android:id="@+id/tvChildren"
                 />
 
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
+                android:textSize="18dp"
                 android:id="@+id/tvRoom"
                 />
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:id="@+id/tvDays"
+                android:textSize="18dp"
                 />
 
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
+                android:textSize="18dp"
                 android:id="@+id/tvService"
                 />
 
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
+                android:textSize="18dp"
                 android:id="@+id/tvTax"
                 />
 
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
+                android:textSize="18dp"
                 android:id="@+id/tvTotal"
                 />
 

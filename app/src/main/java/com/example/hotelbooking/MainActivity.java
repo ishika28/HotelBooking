@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -26,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText etAdults, etChildren, etRoom;
     private Button btnCalculate;
     TextView datepickerCheckInDate,  datepickerCheckOutDate;
-    ProgressBar progressBarCircle;
+    private Handler handler = new Handler();
 
     TextView tvDays, tvError, tvLocation, tvRoomType, tvInDate, tvOutDate, tvAdults, tvChildren, tvRoom, tvSErvice, tvTax, tvTotal;
     int Year2, Year3;
@@ -36,39 +38,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //for full screen and hiding title bar from the window
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getSupportActionBar().hide();
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-
-        View handler;
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (progressStatus < 100) {
-                    progressStatus += 1;
-
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            pbCircle.setProgress(progressStatus);
-                        }
-                    });
-                    try {
-                        Thread.sleep(200);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
-
-        handler.postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                pbCircle.setVisibility(View.GONE);
-            }
-
-        }, 5000);
-    }
 
 
     datepickerCheckInDate = findViewById(R.id.datepickerCheckInDate);
@@ -77,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         etChildren = findViewById(R.id.etChildren);
         etRoom = findViewById(R.id.etRoom);
         btnCalculate = findViewById(R.id.btnCalculate);
-        tvError = (TextView) findViewById(R.id.tverror);
+        tvError =findViewById(R.id.tverror);
 
         //scroll view outputs data binding
         tvDays = findViewById(R.id.tvDays);
@@ -182,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
                     tvTax.setText("Price after tax inclusion : " + GrandTotal);
 
 
-                    Toast.makeText(MainActivity.this, "Total cost : " + GrandTotal, Toast.LENGTH_SHORT).show();
+
 
 
                 } else if (roomType == "AC") {
@@ -199,7 +175,6 @@ public class MainActivity extends AppCompatActivity {
                     tvTax.setText("Price after tax inclusion : " + GrandTotal);
 
 
-                    Toast.makeText(MainActivity.this, "Total cost : " + GrandTotal, Toast.LENGTH_SHORT).show();
 
                 } else if (roomType == "Normal") {
                     price = 1500;
@@ -214,7 +189,6 @@ public class MainActivity extends AppCompatActivity {
                     tvTax.setText("Price after tax inclusion : " + GrandTotal);
 
 
-                    Toast.makeText(MainActivity.this, "Total cost : " + GrandTotal, Toast.LENGTH_SHORT).show();
 
                 }
 
