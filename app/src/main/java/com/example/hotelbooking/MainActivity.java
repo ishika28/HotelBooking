@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText etAdults, etChildren, etRoom;
     private Button btnCalculate;
     TextView datepickerCheckInDate,  datepickerCheckOutDate;
-   
+
     TextView tvDays, tvError, tvLocation, tvRoomType, tvInDate, tvOutDate, tvAdults, tvChildren, tvRoom, tvSErvice, tvTax, tvTotal;
     int Year2, Year3;
     int Month2, Month3;
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
         //spinner for room type
         spinRoomType = findViewById(R.id.spinRoomType);
-        String roomType[] = {"AC", "Delux", "Normal"};
+        String roomType[] = {"AC", "Deluxe", "Normal"};
         ArrayAdapter adapters = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, roomType);
         spinRoomType.setAdapter(adapters);
 
@@ -112,13 +112,13 @@ public class MainActivity extends AppCompatActivity {
                 tvRoom.setText("Number of Rooms : " + etRoom.getText().toString());
 
                 //Dates conversion for number of days
-                Calendar cal1 = Calendar.getInstance();
-                Calendar cal2 = Calendar.getInstance();
-                cal1.set(Year2, Month2, Day2);
-                cal2.set(Year3, Month3, Day3);
-                long millis1 = cal1.getTimeInMillis();
-                long millis2 = cal2.getTimeInMillis();
-                long diff = millis2 - millis1;
+                Calendar calendar1 = Calendar.getInstance();
+                Calendar calendar2 = Calendar.getInstance();
+                calendar1.set(Year2, Month2, Day2);
+                calendar2.set(Year3, Month3, Day3);
+                long date1 = calendar1.getTimeInMillis();
+                long date2 = calendar2.getTimeInMillis();
+                long diff = date2 - date1;
                 long diffDays = (diff / (86400000));
 
                 //Calculation part
@@ -129,12 +129,12 @@ public class MainActivity extends AppCompatActivity {
                 double GrandTotal;
 
 
-                String roomtype = spinRoomType.getSelectedItem().toString();
+                String roomType = spinRoomType.getSelectedItem().toString();
 
 
-                if (roomtype == "Deluxe") {
+                if (roomType == "Deluxe") {
                     //Room Price Per Night:"+"2000
-                    price = 2000;
+                    price = 2500;
                     TotalPrice = price * numRoom * diffDays;
                     ServiceCharge = ((0.10) * TotalPrice) + TotalPrice;
                     GrandTotal = ((0.13) * ServiceCharge) + ServiceCharge;
@@ -149,9 +149,9 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Total cost : " + GrandTotal, Toast.LENGTH_SHORT).show();
 
 
-                } else if (roomtype == "AC") {
+                } else if (roomType == "AC") {
 
-                    price = 3000;
+                    price = 3500;
                     TotalPrice = price * numRoom * diffDays;
                     ServiceCharge = ((0.10) * TotalPrice) + TotalPrice;
                     GrandTotal = ((0.13) * ServiceCharge) + ServiceCharge;
@@ -165,9 +165,8 @@ public class MainActivity extends AppCompatActivity {
 
                     Toast.makeText(MainActivity.this, "Total cost : " + GrandTotal, Toast.LENGTH_SHORT).show();
 
-                } else if (roomtype == "Platinum") {
-                    price = 4000;
-
+                } else if (roomType == "Normal") {
+                    price = 1500;
                     TotalPrice = price * numRoom * diffDays;
                     ServiceCharge = ((0.10) * TotalPrice) + TotalPrice;
                     GrandTotal = ((0.13) * ServiceCharge) + ServiceCharge;
@@ -194,14 +193,19 @@ public class MainActivity extends AppCompatActivity {
         final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
-        int day = c.get(Calendar.DAY_OF_MONTH);
+        final int day = c.get(Calendar.DAY_OF_MONTH);
+
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                String date = year + "/" + month + "/" + dayOfMonth;
+                String date = "Checked In At::" + month + "/" + dayOfMonth + "/" + year;
+                Month2 = month;
+                Day2 = dayOfMonth;
+                Year2 = year;
                 tvInDate.setText(date);
             }
+
         }, year, month, day);
         datePickerDialog.show();
     }
@@ -210,14 +214,19 @@ public class MainActivity extends AppCompatActivity {
         final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
-        int day = c.get(Calendar.DAY_OF_MONTH);
+        final int day = c.get(Calendar.DAY_OF_MONTH);
+
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                String date = year + "/" + month + "/" + dayOfMonth;
+                String date = "Checked Out At::" + month + "/" + dayOfMonth + "/" + year;
+                Month3 = month;
+                Day3 = dayOfMonth;
+                Year3 = year;
                 tvOutDate.setText(date);
             }
+
         }, year, month, day);
         datePickerDialog.show();
     }
